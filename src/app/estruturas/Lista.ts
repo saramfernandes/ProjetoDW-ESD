@@ -89,13 +89,11 @@ export class Lista<T> {
     return this.tamanho;
   }
 
-  paraArray(): T[] {
-    const resultado: T[] = [];
-    let atual = this.primeiro;
-    while (atual) {
-      resultado.push(atual.valor);
-      atual = atual.proximo;
-    }
-    return resultado;
+  paraCada(callback: (valor: T) => void): void {
+  let atual = this.primeiro;
+  while (atual) {
+    callback(atual.valor); // aqui chama a função que você passou, com o valor do nó
+    atual = atual.proximo;
   }
+}
 }

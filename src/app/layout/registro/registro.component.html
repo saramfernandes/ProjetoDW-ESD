@@ -1,1 +1,4 @@
-<p>registro works!</p>
+<div class="registro-container">
+  <input type="text" [(ngModel)]="nome" placeholder="Digite o nome" />
+  <button (click)="cadastrar()" [disabled]="!nome.trim()">Cadastrar</button>
+</div>

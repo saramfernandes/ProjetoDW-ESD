@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { ListaAlfabeticaComponent } from "./lista-alfabetica/lista-alfabetica.component";
+import { ListaChegadaComponent } from "./lista-chegada/lista-chegada.component";
+import { RegistroComponent } from "./registro/registro.component";
+import { BuscaComponent } from "./busca/busca.component";
 
 @Component({
   selector: 'app-layout',
-  imports: [],
+  imports: [ListaAlfabeticaComponent, ListaChegadaComponent, RegistroComponent, BuscaComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })

@@ -19,9 +19,9 @@ export class NoLista<T> {
 }
 
 export class Lista<T> {
-  private primeiro: NoLista<T> | null = null;
-  private ultimo: NoLista<T> | null = null;
-  private tamanho: number = 0;
+  public primeiro: NoLista<T> | null = null;
+  public ultimo: NoLista<T> | null = null;
+  public tamanho: number = 0;
 
   estaVazia(): boolean {
     return this.tamanho === 0;

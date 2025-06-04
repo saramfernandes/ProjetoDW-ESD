@@ -1,4 +1,4 @@
-class Pilha {
+export class Pilha {
   private topo: No | null = null;
 
   estaVazia(): boolean {

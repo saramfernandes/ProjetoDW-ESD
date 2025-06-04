@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Lista } from '../estruturas/Lista';
+import { Pilha } from '../estruturas/Pilha';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,11 @@
-<div class="registro-container">
-  <input type="text" [(ngModel)]="nome" placeholder="Digite o nome" />
-  <button (click)="cadastrar()" [disabled]="!nome.trim()">Cadastrar</button>
+<div class="text-center">
+  <input
+    type="text"
+    class="form-control border-info bg-light"
+    placeholder="INPUT"
+    [(ngModel)]="nome"
+  />
+  <button class="btn btn-success mt-2 w-100" (click)="cadastrar()">
+    CADASTRAR
+  </button>
 </div>

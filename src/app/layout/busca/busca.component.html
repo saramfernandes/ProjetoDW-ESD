@@ -1,1 +1,13 @@
-<p>busca works!</p>
+<div class="text-center p-3">
+  <input
+    type="text"
+    class="form-control border-info mb-3"
+    placeholder="Buscar por nome..."
+    [(ngModel)]="query"
+  />
+  <div class="d-flex justify-content-center gap-2">
+    <button class="btn btn-success px-4" (click)="buscar()">BUSCAR</button>
+
+    <button class="btn btn-danger px-4" (click)="limpar()">LIMPAR</button>
+  </div>
+</div>

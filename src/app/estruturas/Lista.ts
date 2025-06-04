@@ -18,162 +18,84 @@ export class NoLista<T> {
   }
 }
 
-export class List<T> {
-  private first: NoLista<T> | null = null;
-  private last: NoLista<T> | null = null;
-  private length: number = 0;
+export class Lista<T> {
+  private primeiro: NoLista<T> | null = null;
+  private ultimo: NoLista<T> | null = null;
+  private tamanho: number = 0;
 
-  isEmpty(): boolean {
-    return this.length === 0;
+  estaVazia(): boolean {
+    return this.tamanho === 0;
   }
 
-  pushFirst(e: T): void {
-    const newE = new NoLista(e, null, this.first);
-    if (this.isEmpty()) {
-      this.last = newE;
+  inserirOrdenado(valor: T): void {
+    const novoNo = new NoLista(valor);
+
+    if (this.estaVazia()) {
+      this.primeiro = this.ultimo = novoNo;
     } else {
-      this.first!.anterior = newE;
-    }
-    this.first = newE;
-    this.length++;
-  }
+      let atual = this.primeiro;
 
-  pushLast(e: T): void {
-    const newE = new NoLista(e, this.last, null);
-    if (this.isEmpty()) {
-      this.first = newE;
-    } else {
-      this.last!.proximo = newE;
-    }
-    this.last = newE;
-    this.length++;
-  }
-
-  push(e: T): void {
-    this.pushLast(e);
-  }
-
-  pushOrdered(e: T): void {
-    const newE = new NoLista(e);
-
-    if (this.isEmpty()) {
-      this.first = this.last = newE;
-    } else {
-      let current = this.first;
-
-      while (current && String(current.valor).localeCompare(String(e)) < 0) {
-        current = current.proximo;
+      while (atual && String(atual.valor).localeCompare(String(valor)) < 0) {
+        atual = atual.proximo;
       }
 
-      if (!current) {
-        newE.anterior = this.last;
-        this.last!.proximo = newE;
-        this.last = newE;
-      } else if (!current.anterior) {
-        newE.proximo = this.first;
-        this.first!.anterior = newE;
-        this.first = newE;
+      if (!atual) {
+        novoNo.anterior = this.ultimo;
+        this.ultimo!.proximo = novoNo;
+        this.ultimo = novoNo;
+      } else if (!atual.anterior) {
+        novoNo.proximo = this.primeiro;
+        this.primeiro!.anterior = novoNo;
+        this.primeiro = novoNo;
       } else {
-        newE.anterior = current.anterior;
-        newE.proximo = current;
-        current.anterior!.proximo = newE;
-        current.anterior = newE;
+        novoNo.anterior = atual.anterior;
+        novoNo.proximo = atual;
+        atual.anterior!.proximo = novoNo;
+        atual.anterior = novoNo;
       }
     }
 
-    this.length++;
+    this.tamanho++;
   }
 
-  pushAt(index: number, e: T): void {
-    if (index > this.length || index < 0) throw new Error('Illegal Index');
-    if (index === 0) {
-      this.pushFirst(e);
-    } else if (index === this.length) {
-      this.pushLast(e);
-    } else {
-      let current = this.first!;
-      for (let i = 0; i < index; i++) {
-        current = current.proximo!;
-      }
-      const newE = new NoLista(e, current.anterior, current);
-      current.anterior!.proximo = newE;
-      current.anterior = newE;
-      this.length++;
-    }
-  }
-
-  popFirst(): T | null {
-    if (this.isEmpty()) return null;
-    const popped = this.first!;
-    if (this.length === 1) {
-      this.first = null;
-      this.last = null;
-    } else {
-      this.first = popped.proximo;
-      this.first!.anterior = null;
-    }
-    this.length--;
-    return popped.valor;
-  }
-
-  popLast(): T | null {
-    if (this.isEmpty()) return null;
-    const popped = this.last!;
-    if (this.length === 1) {
-      this.first = null;
-      this.last = null;
-    } else {
-      this.last = popped.anterior;
-      this.last!.proximo = null;
-    }
-    this.length--;
-    return popped.valor;
-  }
-
-  popAt(index: number): T | null {
-    if (index >= this.length || index < 0) throw new Error('Illegal Index');
-    if (index === 0) return this.popFirst();
-    if (index === this.length - 1) return this.popLast();
-
-    let current = this.first!;
-    for (let i = 0; i < index; i++) {
-      current = current.proximo!;
-    }
-
-    current.anterior!.proximo = current.proximo;
-    current.proximo!.anterior = current.anterior;
-    this.length--;
-    return current.valor;
-  }
-
-  isPresent(e: T): boolean {
-    let current = this.first;
-    while (current) {
-      if (current.valor === e) return true;
-      current = current.proximo;
+  contem(valor: T): boolean {
+    let atual = this.primeiro;
+    while (atual) {
+      if (atual.valor === valor) return true;
+      atual = atual.proximo;
     }
     return false;
   }
 
-  view(): string {
-    let current = this.first;
-    const values: string[] = [];
-    while (current) {
-      values.push(current.toString());
-      current = current.proximo;
+  verLista(): string {
+    let atual = this.primeiro;
+    const valores: string[] = [];
+    while (atual) {
+      valores.push(atual.toString());
+      atual = atual.proximo;
     }
-    return values.join(' ');
+    return valores.join(' ');
   }
 
-  getFirst(): NoLista<T> | null {
-    return this.first;
+  obterPrimeiro(): NoLista<T> | null {
+    return this.primeiro;
   }
 
-  getLast(): NoLista<T> | null {
-    return this.last;
+  obterUltimo(): NoLista<T> | null {
+    return this.ultimo;
   }
 
-  getLength(): number {
-    return this.length;
+  obterTamanho(): number {
+    return this.tamanho;
+  }
+
+  paraArray(): T[] {
+    const resultado: T[] = [];
+    let atual = this.primeiro;
+    while (atual) {
+      resultado.push(atual.valor);
+      atual = atual.proximo;
+    }
+    return resultado;
   }
 }

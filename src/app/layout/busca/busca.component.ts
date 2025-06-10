@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { EventoService } from '../../services/evento.service';
 
 @Component({
   selector: 'app-busca',
@@ -11,14 +12,14 @@ import { FormsModule } from '@angular/forms';
 export class BuscaComponent {
   query: string = '';
 
+  constructor(private eventoService: EventoService) { }
+
   buscar() {
-    // TODO: IMPLEMENTAR lógica de busca
-    console.log('Buscando:', this.query);
+    this.eventoService.buscarPorQuery(this.query);
   }
 
   limpar() {
-    // TODO: IMPLEMENTAR lógica de limpeza
     this.query = '';
-    console.log('Campo limpo');
+    this.eventoService.buscarPorQuery(this.query);
   }
 }

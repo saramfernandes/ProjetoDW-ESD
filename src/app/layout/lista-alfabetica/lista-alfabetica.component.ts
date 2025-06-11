@@ -27,7 +27,7 @@ renderizarLista(): void {
   const tbody = this.ulRef.nativeElement;
   tbody.innerHTML = '';
 
-  let atual: NoLista<string> | null = this.eventoService.getListaAlfabetica().obterPrimeiro();
+  let atual: NoLista<string> | null = this.listaAlfabetica.obterPrimeiro();
 
   while (atual) {
     const tr = document.createElement('tr');

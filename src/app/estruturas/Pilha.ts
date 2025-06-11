@@ -10,9 +10,13 @@ export class Pilha {
     this.topo = novoNo;
   }
 
-  espiaTopo(): string | null {
-    return this.topo ? this.topo.nome : null;
-  }
+  // espiaTopo(): string | null {
+  //   return this.topo ? this.topo.nome : null;
+  // }
+
+  getTopo(): No | null {
+  return this.topo;
+}
 
   ver(): string[] {
     const nomes: string[] = [];
@@ -25,7 +29,7 @@ export class Pilha {
   }
 }
 
-class No {
+export class No {
   constructor(
     public nome: string,
     public anterior: No | null = null

@@ -3,7 +3,6 @@ import { EventoService } from '../../services/evento.service';
 import { Lista, NoLista } from '../../estruturas/Lista';
 @Component({
   selector: 'app-lista-alfabetica',
-  imports: [],
   templateUrl: './lista-alfabetica.component.html',
   styleUrl: './lista-alfabetica.component.scss'
 })
@@ -24,17 +23,19 @@ export class ListaAlfabeticaComponent implements OnInit{
     this.renderizarLista();
   }
 
-  renderizarLista(): void {
-    const ul = this.ulRef.nativeElement;
-    ul.innerHTML = '';
+renderizarLista(): void {
+  const tbody = this.ulRef.nativeElement;
+  tbody.innerHTML = '';
 
-    let atual: NoLista<string> | null = this.eventoService.getListaAlfabetica().obterPrimeiro();
+  let atual: NoLista<string> | null = this.eventoService.getListaAlfabetica().obterPrimeiro();
 
-    while (atual) {
-      const li = document.createElement('li');
-      li.textContent = atual.valor;
-      ul.appendChild(li);
-      atual = atual.proximo;
-    }
+  while (atual) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.textContent = atual.valor;
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+    atual = atual.proximo;
   }
+}
 }

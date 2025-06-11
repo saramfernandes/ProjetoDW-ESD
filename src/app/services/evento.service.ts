@@ -23,6 +23,9 @@ export class EventoService {
 
     this.listaAlfabeticaOriginalChanged.emit(this.listaAlfabeticaOriginal);
     this.listaChegadaChanged.emit(this.listaChegada);
+    
+    this.listaAlfabetica = this.listaAlfabeticaOriginal;
+    this.listaAlfabeticaChanged.emit(this.listaAlfabetica);
   }
 
   getListaAlfabetica(): Lista<string> {

@@ -1,0 +1,22 @@
+<div class="text-center p-3">
+  <div class="row g-2">
+    <div class="col-12">
+      <input type="text" class="form-control border-info mb-3" [(ngModel)]="nome" placeholder="Veja se algúem específico chegou" />
+    </div>
+  </div>
+  <div class="row g-2">
+    <div class="col-6">
+      <button class="btn btn-primary w-100 px-4 mb-3" (click)="buscar()">Verificar</button>
+    </div>
+    <div class="col-6">
+      <div
+        *ngIf="resultado !== null"
+        [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'"
+        class="px-3 py-2 rounded text-center w-100 mb-3"
+        style="min-width: 90px;"
+      >
+        {{ resultado ? 'Chegou' : 'Não Chegou' }}
+      </div>
+    </div>
+  </div>
+</div>

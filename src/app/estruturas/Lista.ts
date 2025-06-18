@@ -2,15 +2,18 @@ export class NoLista<T> {
   valor: T;
   anterior: NoLista<T> | null = null;
   proximo: NoLista<T> | null = null;
+  indice: number = 0;
 
   constructor(
     valor: T,
     anterior: NoLista<T> | null = null,
-    proximo: NoLista<T> | null = null
+    proximo: NoLista<T> | null = null,
+    indice: number = 0
   ) {
     this.valor = valor;
     if (anterior) this.anterior = anterior;
     if (proximo) this.proximo = proximo;
+    this.indice = indice;
   }
 
   toString(): string {
@@ -56,6 +59,45 @@ export class Lista<T> {
     }
 
     this.tamanho++;
+    this.atualizarIndices();
+  }
+
+  atualizarIndices(): void {
+    let atual = this.primeiro;
+    let idx = 0;
+    while (atual) {
+      atual.indice = idx;
+      idx++;
+      atual = atual.proximo;
+    }
+  }
+
+  // Busca um nó da lista baseado no índice passado.
+  // Para ser um pouco mais performático, inicia a
+  // busca a partir inicio OU fim, dependendo de
+  // qual é mais perto do índice.
+  obterNoPorIndice(indice: number): NoLista<T> | null {
+    if (indice < 0 || indice >= this.tamanho) return null;
+
+    if (indice < this.tamanho / 2) {
+      // Percorre do início
+      let atual = this.primeiro;
+      let idx = 0;
+      while (atual && idx < indice) {
+        atual = atual.proximo;
+        idx++;
+      }
+      return atual;
+    } else {
+      // Percorre do final
+      let atual = this.ultimo;
+      let idx = this.tamanho - 1;
+      while (atual && idx > indice) {
+        atual = atual.anterior;
+        idx--;
+      }
+      return atual;
+    }
   }
 
   contem(valor: T): boolean {
@@ -90,10 +132,10 @@ export class Lista<T> {
   }
 
   paraCada(callback: (valor: T) => void): void {
-  let atual = this.primeiro;
-  while (atual) {
-    callback(atual.valor); // aqui chama a função que você passou, com o valor do nó
-    atual = atual.proximo;
+    let atual = this.primeiro;
+    while (atual) {
+      callback(atual.valor);
+      atual = atual.proximo;
+    }
   }
-}
 }

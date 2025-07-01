@@ -42,6 +42,8 @@ export class Lista<T> {
   }
 
 // Insere um novo nó na lista de forma ordenada.
+// Poderia ter sido usado uma Busca Binária aqui
+// para encontrar o índice onde deve ser inserido
   inserirOrdenado(valor: T): void {
     const novoNo = new NoLista(valor);
 

@@ -14,6 +14,8 @@ export class ListaAlfabeticaComponent implements OnInit{
     this.listaAlfabetica = this.eventoService.getListaAlfabetica();
   }
 
+  // Se inscreve no evento listaAlfabeticaChanged para reagir quando a lista for alterada
+  // e renderiza a lista atualizada
   ngOnInit(): void {
     this.eventoService.listaAlfabeticaChanged.subscribe((lista) => {
       this.listaAlfabetica = lista;
@@ -26,9 +28,9 @@ export class ListaAlfabeticaComponent implements OnInit{
 renderizarLista(): void {
   const tbody = this.ulRef.nativeElement;
   tbody.innerHTML = '';
-
+// Começa pelo primeiro nó da lista
   let atual: NoLista<string> | null = this.listaAlfabetica.obterPrimeiro();
-
+ // Vai percorrendo a lista e criando elementos <tr><td> com os valores
   while (atual) {
     const tr = document.createElement('tr');
     const td = document.createElement('td');

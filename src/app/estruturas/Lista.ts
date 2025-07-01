@@ -1,3 +1,4 @@
+//Nó da lista duplamente encadeada
 export class NoLista<T> {
   valor: T;
   anterior: NoLista<T> | null = null;
@@ -20,16 +21,18 @@ export class NoLista<T> {
     return String(this.valor);
   }
 }
-
+//Lista duplamente encadeada ordenada
 export class Lista<T> {
   public primeiro: NoLista<T> | null = null;
   public ultimo: NoLista<T> | null = null;
   public tamanho: number = 0;
 
+//Verifica se a lista está vazia
   estaVazia(): boolean {
     return this.tamanho === 0;
   }
 
+// Insere um novo nó na lista de forma ordenada.
   inserirOrdenado(valor: T): void {
     const novoNo = new NoLista(valor);
 
@@ -62,6 +65,7 @@ export class Lista<T> {
     this.atualizarIndices();
   }
 
+// Atualiza os índices dos nós (só pra manter controle mesmo)
   atualizarIndices(): void {
     let atual = this.primeiro;
     let idx = 0;
@@ -100,42 +104,11 @@ export class Lista<T> {
     }
   }
 
-  contem(valor: T): boolean {
-    let atual = this.primeiro;
-    while (atual) {
-      if (atual.valor === valor) return true;
-      atual = atual.proximo;
-    }
-    return false;
-  }
-
-  verLista(): string {
-    let atual = this.primeiro;
-    const valores: string[] = [];
-    while (atual) {
-      valores.push(atual.toString());
-      atual = atual.proximo;
-    }
-    return valores.join(' ');
-  }
-
   obterPrimeiro(): NoLista<T> | null {
     return this.primeiro;
   }
 
-  obterUltimo(): NoLista<T> | null {
-    return this.ultimo;
-  }
-
   obterTamanho(): number {
     return this.tamanho;
-  }
-
-  paraCada(callback: (valor: T) => void): void {
-    let atual = this.primeiro;
-    while (atual) {
-      callback(atual.valor);
-      atual = atual.proximo;
-    }
   }
 }

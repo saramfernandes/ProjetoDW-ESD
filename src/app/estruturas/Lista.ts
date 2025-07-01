@@ -1,3 +1,8 @@
+export interface Pessoa {
+  id: string;
+  nome: string;
+  horario: Date;
+}
 //Nó da lista duplamente encadeada
 export class NoLista<T> {
   valor: T;
@@ -18,6 +23,10 @@ export class NoLista<T> {
   }
 
   toString(): string {
+    // Se T for Pessoa, retorna nome
+    if (typeof this.valor === 'object' && this.valor !== null && 'nome' in this.valor) {
+      return (this.valor as any).nome;
+    }
     return String(this.valor);
   }
 }
@@ -41,7 +50,12 @@ export class Lista<T> {
     } else {
       let atual = this.primeiro;
 
-      while (atual && String(atual.valor).localeCompare(String(valor)) < 0) {
+      // Ordena por nome se T for Pessoa
+      while (atual &&
+        ((typeof atual.valor === 'object' && atual.valor !== null && 'nome' in atual.valor && typeof (valor as any).nome === 'string' &&
+          (atual.valor as any).nome.localeCompare((valor as any).nome) < 0)
+        || (typeof atual.valor !== 'object' && String(atual.valor).localeCompare(String(valor)) < 0))
+      ) {
         atual = atual.proximo;
       }
 
@@ -110,5 +124,28 @@ export class Lista<T> {
 
   obterTamanho(): number {
     return this.tamanho;
+  }
+
+  removerPorId(id: string): boolean {
+    let atual = this.primeiro;
+    while (atual) {
+      if (typeof atual.valor === 'object' && atual.valor !== null && 'id' in atual.valor && atual.valor.id === id) {
+        if (atual.anterior) {
+          atual.anterior.proximo = atual.proximo;
+        } else {
+          this.primeiro = atual.proximo;
+        }
+        if (atual.proximo) {
+          atual.proximo.anterior = atual.anterior;
+        } else {
+          this.ultimo = atual.anterior;
+        }
+        this.tamanho--;
+        this.atualizarIndices();
+        return true;
+      }
+      atual = atual.proximo;
+    }
+    return false;
   }
 }

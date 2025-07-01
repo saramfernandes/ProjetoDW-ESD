@@ -2,12 +2,13 @@
   <table class="table table-bordered table-striped">
     <thead class="table-light">
       <tr>
-        <th scope="col" class="text-center" colspan="1" style="font-size: 1.3rem;">
+        <th scope="col" [colSpan]="2" class="text-center" colspan="1" style="font-size: 1.3rem;">
           Lista alfabética
         </th>
       </tr>
       <tr>
         <th scope="col">Nome</th>
+        <th scope="col">Horário</th>
       </tr>
     </thead>
     <tbody #ulRef></tbody>

@@ -11,9 +11,10 @@
     <div class="col-6">
       <div
         *ngIf="resultado !== null"
-        [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'"
-        class="px-3 py-2 rounded text-center w-100 mb-3"
+        [ngClass]="[resultado ? 'alert alert-success' : 'alert alert-danger', 'px-3', 'py-2', 'rounded', 'text-center', 'w-100', 'mb-3', 'fade-glow', animando ? 'fade-glow-anim' : '']"
+        [ngStyle]="animando ? { '--glow-color': (resultado ? '#4be07b' : '#ff5e5e') } : {}"
         style="min-width: 90px;"
+        (animationend)="animando = false"
       >
         {{ resultado ? 'Chegou' : 'Não Chegou' }}
       </div>

@@ -1,13 +1,20 @@
 <div class="text-center p-3">
-  <input
-    type="text"
-    class="form-control border-info mb-3"
-    placeholder="Filtrar por nome..."
-    [(ngModel)]="query"
-  />
-  <div class="d-flex justify-content-center gap-2">
-    <button class="btn btn-success px-4" (click)="buscar()">BUSCAR</button>
-
-    <button class="btn btn-danger px-4" (click)="limpar()">LIMPAR</button>
+  <div class="row g-2">
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control border-info mb-3"
+        placeholder="Filtrar por nome..."
+        [(ngModel)]="query"
+      />
+    </div>
+  </div>
+  <div class="row g-2">
+    <div class="col-6">
+      <button class="btn btn-success px-4 w-100" (click)="buscar()">BUSCAR</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger px-4 w-100" (click)="limpar()">LIMPAR</button>
+    </div>
   </div>
 </div>

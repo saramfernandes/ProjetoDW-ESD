@@ -1,13 +1,13 @@
-import { Lista } from './Lista';
+import { Lista, Pessoa } from './Lista';
 
 export class BuscaLinear {
-  static buscarPorNome(query: string, lista: Lista<string>): Lista<string> {
-    const resultados = new Lista<string>();
+  static buscarPorNome(query: string, lista: Lista<Pessoa>): Lista<Pessoa> {
+    const resultados = new Lista<Pessoa>();
     let atual = lista.primeiro;
     const termo = query.toLowerCase();
 
     while (atual) {
-      if (String(atual.valor).toLowerCase().includes(termo)) {
+      if (atual.valor.nome.toLowerCase().includes(termo)) {
         resultados.inserirOrdenado(atual.valor);
       }
       atual = atual.proximo;

@@ -20,4 +20,8 @@ export class RegistroComponent {
       this.nome = '';
     }
   }
+
+  desfazerUltimaChegada() {
+    this.serviceEvent.desfazerUltimaChegada();
+  }
 }

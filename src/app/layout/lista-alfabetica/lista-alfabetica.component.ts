@@ -32,14 +32,14 @@ renderizarLista(): void {
   let atual: NoLista<Pessoa> | null = this.listaAlfabetica.obterPrimeiro();
  // Vai percorrendo a lista e criando elementos <tr><td> com os valores
   while (atual) {
-    const tr = document.createElement('tr');
-    const tdNome = document.createElement('td');
-    tdNome.textContent = atual.valor.nome;
-    const tdHorario = document.createElement('td');
-    tdHorario.textContent = new Date(atual.valor.horario).toLocaleTimeString();
-    tr.appendChild(tdNome);
-    tr.appendChild(tdHorario);
-    tbody.appendChild(tr);
+    const linhaTabela = document.createElement('tr');
+    const celulaNome = document.createElement('td');
+    celulaNome.textContent = atual.valor.nome;
+    const celulaHorario = document.createElement('td');
+    celulaHorario.textContent = new Date(atual.valor.horario).toLocaleTimeString();
+    linhaTabela.appendChild(celulaNome);
+    linhaTabela.appendChild(celulaHorario);
+    tbody.appendChild(linhaTabela);
     atual = atual.proximo;
   }
 }
